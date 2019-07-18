@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="shopWebViewActivity"
+            type="com.hdh.shoplistfilter.ui.web.ShopWebViewActivity" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.web.ShopWebViewActivity">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_08"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.08" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_13"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.13"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_87"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.87"/>
+
+        <!--Toolbar Section-->
+        <View
+            android:id="@+id/vToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#ffffff"
+            app:layout_constraintBottom_toTopOf="@+id/gl_08"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <View
+            android:id="@+id/vDismiss"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/gl_13"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/ic_close_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvShopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/vJoiningHelper"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_87"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_share_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--WebView-->
+        <WebView
+            android:id="@+id/wvShop"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@+id/gl_08"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

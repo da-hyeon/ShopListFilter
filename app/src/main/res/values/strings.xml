@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">ShopListFilter</string>
+
+    <!--main-->
+    <string name="top_rankingText">2017년 6월 4주차 랭킹</string>
+    <string name="top_filterText">필터</string>
+    <string name="top_searchText">쇼핑몰 검색</string>
+
+    <!--filter-->
+    <string name="filter_mainText">쇼핑몰 필터</string>
+    <string name="filter_ageText">연령대</string>
+    <string name="filter_styleText">스타일</string>
+
+    <string name="filter_ageText1">10대</string>
+    <string name="filter_ageText2">20대 초반</string>
+    <string name="filter_ageText3">20대 중반</string>
+    <string name="filter_ageText4">20대 후반</string>
+    <string name="filter_ageText5">30대 초반</string>
+    <string name="filter_ageText6">30대 중반</string>
+    <string name="filter_ageText7">30대 후반</string>
+
+    <string name="filter_styleText1">페미닌</string>
+    <string name="filter_styleText2">모던시크</string>
+    <string name="filter_styleText3">심플베이직</string>
+    <string name="filter_styleText4">러블리</string>
+    <string name="filter_styleText5">유니크</string>
+    <string name="filter_styleText6">미시스타일</string>
+    <string name="filter_styleText7">캠퍼스룩</string>
+    <string name="filter_styleText8">빈티지</string>
+    <string name="filter_styleText9">섹시글램</string>
+    <string name="filter_styleText10">스쿨룩</string>
+    <string name="filter_styleText11">로맨틱</string>
+    <string name="filter_styleText12">오피스룩</string>
+    <string name="filter_styleText13">럭셔리</string>
+    <string name="filter_styleText14">헐리웃스타일</string>
+
+    <string name="filter_ButtonText">선택 완료</string>
+
+
+    <string name="joiningHelper_InfoText">딱! 한번만 입력해 놓으면,\n쇼핑몰 가입 필드를 자동으로 채워드려요</string>
+</resources>

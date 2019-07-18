@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clView"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#ffffff">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_10"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_50"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/tvShopRank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/gl_10"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivShopImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:id="@+id/tvShopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_50"
+            app:layout_constraintLeft_toRightOf="@+id/ivShopImage"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:text="육육걸즈"/>
+
+        <TextView
+            android:id="@+id/tvShopRankText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_50"
+            app:layout_constraintLeft_toRightOf="@+id/tvShopName"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:id="@+id/tvShopAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/gl_50"
+            android:layout_marginTop="3dp"
+            app:layout_constraintLeft_toRightOf="@+id/ivShopImage"
+            android:background="@drawable/round_button"
+            android:layout_marginLeft="5dp"
+            android:textSize="13dp"
+            android:padding="3dp"
+            android:text="10대 20대"/>
+
+        <TextView
+            android:id="@+id/tvShopStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/gl_50"
+            android:layout_marginTop="3dp"
+            app:layout_constraintLeft_toRightOf="@+id/tvShopAge"
+            android:background="@drawable/round_button"
+            android:layout_marginLeft="5dp"
+            android:textSize="13dp"
+            android:padding="3dp"
+            android:text="심플베이직 러블리"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
