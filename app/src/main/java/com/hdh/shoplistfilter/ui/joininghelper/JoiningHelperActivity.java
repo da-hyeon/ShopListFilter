@@ -47,6 +47,7 @@ public class JoiningHelperActivity extends BaseActivity implements JoiningHelper
                 mPresenter.clickComplete(
                         mBinding.etID.getText().toString(),
                         mBinding.etName.getText().toString(),
+                        mBinding.etRestAddress.getText().toString(),
                         mBinding.sAreaCode.getSelectedItem().toString(),
                         mBinding.etHomeMidNumber.getText().toString(),
                         mBinding.etHomeLastNumber.getText().toString(),
@@ -57,14 +58,18 @@ public class JoiningHelperActivity extends BaseActivity implements JoiningHelper
                         mBinding.etEmailLast.getText().toString(),
                         mBinding.tvBirthday.getText().toString(),
                         mBinding.sArea.getSelectedItem().toString(),
-                        mBinding.sPasswordCheck.getSelectedItem().toString(),
-                        mBinding.etPasswordAnswer.getText().toString()
+                        mBinding.sPasswordCheck.getSelectedItemPosition() + 1,
+                        mBinding.etPasswordAnswer.getText().toString() ,
+                        mBinding.sAreaCode.getSelectedItemPosition() + 1,
+                        mBinding.sPhoneCode.getSelectedItemPosition() + 1,
+                        mBinding.sArea.getSelectedItemPosition() + 1
                 )
         );
     }
 
     private void initData() {
         mPresenter = new JoiningHelperPresenter(this, this, this);
+        mPresenter.setFormInitial();
         mPresenter.setAreaCodeSpinner(mBinding.sAreaCode);
         mPresenter.setPhoneCodeSpinner(mBinding.sPhoneCode);
         mPresenter.setAreaSpinner(mBinding.sArea);
@@ -79,9 +84,53 @@ public class JoiningHelperActivity extends BaseActivity implements JoiningHelper
         mPresenter.clickBackPressed();
     }
 
+    /**
+     * 액티비티 이동
+     */
     @Override
     public void moveActivity(Intent intent) {
         startActivityForResult(intent, Constans.SEARCH_ADDRESS_ACTIVITY);
+    }
+
+    /**
+     * 저장되어있는 유저 정보를 적음.
+     */
+    @Override
+    public void setFormInitial(String userID,
+                               String userName,
+                               String userRestAddress,
+                               int userFirstHomeNumber,
+                               String userMidHomeNumber,
+                               String userLastHomeNumber,
+                               int userFirstPhoneNumber,
+                               String userMidPhoneNumber,
+                               String userLastPhoneNumber,
+                               String userFirstEmail,
+                               String userLastEmail,
+                               int userArea,
+                               int userPasswordConfirmationQuestion,
+                               String userPasswordConfirmationAnswer) {
+
+        mBinding.etID.setText(userID);
+
+        mBinding.etName.setText(userName);
+
+        mBinding.etRestAddress.setText(userRestAddress);
+
+        mBinding.sAreaCode.setSelection(userFirstHomeNumber);
+        mBinding.etHomeMidNumber.setText(userMidHomeNumber);
+        mBinding.etHomeLastNumber.setText(userLastHomeNumber);
+
+        mBinding.sPhoneCode.setSelection(userFirstPhoneNumber);
+        mBinding.etPhoneMidNumber.setText(userMidPhoneNumber);
+        mBinding.etPhoneLastNumber.setText(userLastPhoneNumber);
+
+        mBinding.etEmailFirst.setText(userFirstEmail);
+        mBinding.etEmailLast.setText(userLastEmail);
+
+        mBinding.sArea.setSelection(userArea);
+        mBinding.sPasswordCheck.setSelection(userPasswordConfirmationQuestion);
+        mBinding.etPasswordAnswer.setText(userPasswordConfirmationAnswer);
     }
 
     @Override

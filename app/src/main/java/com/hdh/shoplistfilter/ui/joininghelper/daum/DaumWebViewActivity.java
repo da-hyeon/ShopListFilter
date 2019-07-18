@@ -22,14 +22,12 @@ public class DaumWebViewActivity extends AppCompatActivity {
         @JavascriptInterface
         @SuppressWarnings("unused")
         public void processDATA(String data) {
-
             Bundle extra = new Bundle();
             Intent intent = new Intent();
             extra.putString(Constans.SEARCH_ADDRESS_DATA, data);
             intent.putExtras(extra);
             setResult(RESULT_OK, intent);
             finish();
-
         }
     }
 
@@ -50,7 +48,7 @@ public class DaumWebViewActivity extends AppCompatActivity {
             }
         });
 
-        mBinding.wvDaum.loadUrl("http://kjg123kg.cafe24.com/daum.html");
+        mBinding.wvDaum.loadUrl(Constans.DAUM_API_URL);
     }
 
 }

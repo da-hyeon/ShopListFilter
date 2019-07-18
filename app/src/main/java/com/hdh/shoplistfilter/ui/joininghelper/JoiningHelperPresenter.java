@@ -4,15 +4,19 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.hdh.shoplistfilter.Constans;
+import com.hdh.shoplistfilter.MyApplication;
 import com.hdh.shoplistfilter.R;
+import com.hdh.shoplistfilter.data.model.UserInfo;
 import com.hdh.shoplistfilter.ui.joininghelper.daum.DaumWebViewActivity;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -21,13 +25,55 @@ public class JoiningHelperPresenter implements JoiningHelperContract.Presenter {
     private JoiningHelperContract.View mView;
     private Context mContext;
     private Activity mActivity;
+
+    private UserInfo mUserInfo;
+
     private int mYear, mMonth, mDay;
 
+    private String mUserAddressNumber , mUserAddress ;
 
     public JoiningHelperPresenter(JoiningHelperContract.View mView, Context mContext, Activity mActivity) {
         this.mView = mView;
         this.mContext = mContext;
         this.mActivity = mActivity;
+        mUserInfo = MyApplication.getUserInfoInstance();
+    }
+
+    /**
+     * 저장되어있는 유저정보가 있으면 초기설정
+     */
+    @Override
+    public void setFormInitial() {
+        //주소 설정이 되어있으면
+        if (!mUserInfo.getUserAddressNumber().equals("")){
+            mView.showAddressSelectedLayout();
+            mView.hideAddressFindLayout();
+
+            mView.changeAddressNumber(mUserInfo.getUserAddressNumber());
+            mView.changeAddress(mUserInfo.getUserAddress());
+        }
+
+        if (!mUserInfo.getUserBirthdayYear().equals("")){
+            mView.showBirthDismiss();
+            mView.changeBirthday(mUserInfo.getUserBirthdayYear() + " 년" + mUserInfo.getUserBirthdayMonth() + "월 " + mUserInfo.getUserBirthdayDay() + "일");
+        }
+
+        mView.setFormInitial(
+                mUserInfo.getUserID() ,
+                mUserInfo.getUserName(),
+                mUserInfo.getUserRestAddress() ,
+                mUserInfo.getUserFirstPhoneNumberPosition() ,
+                mUserInfo.getUserMidHomeNumber() ,
+                mUserInfo.getUserLastHomeNumber() ,
+                mUserInfo.getUserFirstHomePosition() ,
+                mUserInfo.getUserMidPhoneNumber() ,
+                mUserInfo.getUserLastPhoneNumber() ,
+                mUserInfo.getUserFirstEmail() ,
+                mUserInfo.getUserLastEmail() ,
+                mUserInfo.getUserAreaPosition(),
+                mUserInfo.getUserPasswordConfirmationQuestion(),
+                mUserInfo.getUserPasswordConfirmationAnswer()
+        );
     }
 
     /**
@@ -39,7 +85,6 @@ public class JoiningHelperPresenter implements JoiningHelperContract.Presenter {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(mContext, R.layout.spinner_item, areaCode);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-
     }
 
     /**
@@ -141,8 +186,40 @@ public class JoiningHelperPresenter implements JoiningHelperContract.Presenter {
      * 완료버튼 클릭 이벤트 처리
      */
     @Override
-    public void clickComplete(String userID, String userName, String userFirstHomeNumber, String userMidHomeNumber, String userLastHomeNumber, String userFirstPhoneNumber, String userMidPhoneNumber, String userLastPhoneNumber, String userFirstEmail, String userLastEmail, String userBirthday, String userArea, String userPasswordConfirmationQuestion, String userPasswordConfirmationAnswer) {
+    public void clickComplete(
+            String userID,
+            String userName,
+            String userRestAddress ,
+            String userFirstHomeNumber, String userMidHomeNumber, String userLastHomeNumber,
+            String userFirstPhoneNumber, String userMidPhoneNumber, String userLastPhoneNumber,
+            String userFirstEmail, String userLastEmail,
+            String userBirthday,
+            String userArea,
+            int userPasswordConfirmationQuestion, String userPasswordConfirmationAnswer ,
+            int userFirstHomePosition,
+            int userFirstPhoneNumberPosition,
+            int userAreaPosition) {
 
+        MyApplication.getUserInfoInstance().setUserInfo(
+                userID ,
+                userName ,
+                userRestAddress, mUserAddressNumber , mUserAddress ,
+                userFirstHomeNumber , userMidHomeNumber , userLastHomeNumber ,
+                userFirstPhoneNumber , userMidPhoneNumber , userLastPhoneNumber ,
+                userFirstEmail , userLastEmail ,
+                mYear+"" ,
+                mMonth+"" ,
+                mDay+"" ,
+                userArea ,
+                userPasswordConfirmationQuestion ,
+                userPasswordConfirmationAnswer ,
+                userFirstHomePosition ,
+                userFirstPhoneNumberPosition ,
+                userAreaPosition
+                );
+        Log.d("userInfo" , MyApplication.getUserInfoInstance()+"");
+
+        mView.showSuccessDialog("성공", "쇼핑몰에 편하게 가입할 수 있습니다.");
     }
 
     /**
@@ -152,21 +229,24 @@ public class JoiningHelperPresenter implements JoiningHelperContract.Presenter {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == Constans.SEARCH_ADDRESS_ACTIVITY) {
             if (resultCode == RESULT_OK) {
-                String data = intent.getExtras().getString(Constans.SEARCH_ADDRESS_DATA);
+                String data = Objects.requireNonNull(intent.getExtras()).getString(Constans.SEARCH_ADDRESS_DATA);
                 if (data != null) {
                     mView.hideAddressFindLayout();
                     mView.showAddressSelectedLayout();
-                    String[] address = data.split(",");
 
-                    mView.changeAddressNumber(address[0]);
-                    mView.changeAddress(address[1].substring(1));
+                    String[] address = data.split(",");
+                    mUserAddressNumber = address[0];
+                    mUserAddress = address[1].substring(1);
+
+                    mView.changeAddressNumber(mUserAddressNumber);
+                    mView.changeAddress(mUserAddress);
                 }
             }
         }
     }
 
     //날짜 대화상자 리스너 부분
-    DatePickerDialog.OnDateSetListener mDateSetListener =
+    private DatePickerDialog.OnDateSetListener mDateSetListener =
 
             (view, year, monthOfYear, dayOfMonth) -> {
                 mYear = year;

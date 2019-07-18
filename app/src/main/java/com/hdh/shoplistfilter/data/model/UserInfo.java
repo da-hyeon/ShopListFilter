@@ -14,10 +14,77 @@ public class UserInfo {
     private String userLastPhoneNumber;
     private String userFirstEmail;
     private String userLastEmail;
-    private String userBirthday;
+    private String userBirthdayYear;
+    private String userBirthdayMonth;
+    private String userBirthdayDay;
     private String userArea;
-    private String userPasswordConfirmationQuestion;
+    private int userPasswordConfirmationQuestion;
     private String userPasswordConfirmationAnswer;
+
+    private int userFirstHomePosition;
+    private int userFirstPhoneNumberPosition;
+    private int userAreaPosition;
+
+    /**
+     * DB 에서 불러올 수 없으므로 초기 설정
+     * DB 연결 후 삭제요망
+     */
+    public UserInfo() {
+        userID = "황다현";
+        userName = "황다현";
+        userAddressNumber = "01799";
+        userAddress = "서울 노원구 노원로58 (우방아파트)";
+        userRestAddress = "404동 202호";
+        userFirstPhoneNumber = "010";
+        userMidPhoneNumber = "7600";
+        userLastPhoneNumber = "1318";
+        userFirstEmail = "kjg123kg";
+        userLastEmail = "gmail.com";
+        userBirthdayYear = "1994";
+        userBirthdayMonth = "06";
+        userBirthdayDay = "18";
+        userArea = "서울";
+        userAreaPosition = 1;
+        userFirstPhoneNumberPosition = 1;
+        userPasswordConfirmationQuestion = 3;
+        userPasswordConfirmationAnswer = "아무거나입력";
+    }
+
+    public void setUserInfo(String userID,
+                            String userName,
+                            String userAddressNumber, String userAddress, String userRestAddress,
+                            String userFirstHomeNumber, String userMidHomeNumber, String userLastHomeNumber,
+                            String userFirstPhoneNumber, String userMidPhoneNumber, String userLastPhoneNumber,
+                            String userFirstEmail, String userLastEmail,
+                            String userBirthdayYear, String userBirthdayMonth, String userBirthdayDay,
+                            String userArea,
+                            int userPasswordConfirmationQuestion, String userPasswordConfirmationAnswer ,
+                            int userFirstHomePosition,
+                            int userFirstPhoneNumberPosition,
+                            int userAreaPosition) {
+        this.userID = userID;
+        this.userName = userName;
+        this.userAddressNumber = userAddressNumber;
+        this.userAddress = userAddress;
+        this.userRestAddress = userRestAddress;
+        this.userFirstHomeNumber = userFirstHomeNumber;
+        this.userMidHomeNumber = userMidHomeNumber;
+        this.userLastHomeNumber = userLastHomeNumber;
+        this.userFirstPhoneNumber = userFirstPhoneNumber;
+        this.userMidPhoneNumber = userMidPhoneNumber;
+        this.userLastPhoneNumber = userLastPhoneNumber;
+        this.userFirstEmail = userFirstEmail;
+        this.userLastEmail = userLastEmail;
+        this.userBirthdayYear = userBirthdayYear;
+        this.userBirthdayMonth = userBirthdayMonth;
+        this.userBirthdayDay = userBirthdayDay;
+        this.userArea = userArea;
+        this.userPasswordConfirmationQuestion = userPasswordConfirmationQuestion;
+        this.userPasswordConfirmationAnswer = userPasswordConfirmationAnswer;
+        this.userFirstHomePosition = userFirstHomePosition;
+        this.userFirstPhoneNumberPosition = userFirstPhoneNumberPosition;
+        this.userAreaPosition = userAreaPosition;
+    }
 
     public String getUserID() {
         return userID;
@@ -123,12 +190,29 @@ public class UserInfo {
         this.userLastEmail = userLastEmail;
     }
 
-    public String getUserBirthday() {
-        return userBirthday;
+
+    public String getUserBirthdayYear() {
+        return userBirthdayYear;
     }
 
-    public void setUserBirthday(String userBirthday) {
-        this.userBirthday = userBirthday;
+    public void setUserBirthdayYear(String userBirthdayYear) {
+        this.userBirthdayYear = userBirthdayYear;
+    }
+
+    public String getUserBirthdayMonth() {
+        return userBirthdayMonth;
+    }
+
+    public void setUserBirthdayMonth(String userBirthdayMonth) {
+        this.userBirthdayMonth = userBirthdayMonth;
+    }
+
+    public String getUserBirthdayDay() {
+        return userBirthdayDay;
+    }
+
+    public void setUserBirthdayDay(String userBirthdayDay) {
+        this.userBirthdayDay = userBirthdayDay;
     }
 
     public String getUserArea() {
@@ -139,11 +223,11 @@ public class UserInfo {
         this.userArea = userArea;
     }
 
-    public String getUserPasswordConfirmationQuestion() {
+    public int getUserPasswordConfirmationQuestion() {
         return userPasswordConfirmationQuestion;
     }
 
-    public void setUserPasswordConfirmationQuestion(String userPasswordConfirmationQuestion) {
+    public void setUserPasswordConfirmationQuestion(int userPasswordConfirmationQuestion) {
         this.userPasswordConfirmationQuestion = userPasswordConfirmationQuestion;
     }
 
@@ -153,5 +237,54 @@ public class UserInfo {
 
     public void setUserPasswordConfirmationAnswer(String userPasswordConfirmationAnswer) {
         this.userPasswordConfirmationAnswer = userPasswordConfirmationAnswer;
+    }
+
+    public int getUserFirstHomePosition() {
+        return userFirstHomePosition;
+    }
+
+    public void setUserFirstHomePosition(int userFirstHomePosition) {
+        this.userFirstHomePosition = userFirstHomePosition;
+    }
+
+    public int getUserFirstPhoneNumberPosition() {
+        return userFirstPhoneNumberPosition;
+    }
+
+    public void setUserFirstPhoneNumberPosition(int userFirstPhoneNumberPosition) {
+        this.userFirstPhoneNumberPosition = userFirstPhoneNumberPosition;
+    }
+
+    public int getUserAreaPosition() {
+        return userAreaPosition;
+    }
+
+    public void setUserAreaPosition(int userAreaPosition) {
+        this.userAreaPosition = userAreaPosition;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "userID='" + userID + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userAddressNumber='" + userAddressNumber + '\'' +
+                ", userAddress='" + userAddress + '\'' +
+                ", userRestAddress='" + userRestAddress + '\'' +
+                ", userFirstHomeNumber='" + userFirstHomeNumber + '\'' +
+                ", userMidHomeNumber='" + userMidHomeNumber + '\'' +
+                ", userLastHomeNumber='" + userLastHomeNumber + '\'' +
+                ", userFirstPhoneNumber='" + userFirstPhoneNumber + '\'' +
+                ", userMidPhoneNumber='" + userMidPhoneNumber + '\'' +
+                ", userLastPhoneNumber='" + userLastPhoneNumber + '\'' +
+                ", userFirstEmail='" + userFirstEmail + '\'' +
+                ", userLastEmail='" + userLastEmail + '\'' +
+                ", userBirthdayYear='" + userBirthdayYear + '\'' +
+                ", userBirthdayMonth='" + userBirthdayMonth + '\'' +
+                ", userBirthdayDay='" + userBirthdayDay + '\'' +
+                ", userArea='" + userArea + '\'' +
+                ", userPasswordConfirmationQuestion='" + userPasswordConfirmationQuestion + '\'' +
+                ", userPasswordConfirmationAnswer='" + userPasswordConfirmationAnswer + '\'' +
+                '}';
     }
 }

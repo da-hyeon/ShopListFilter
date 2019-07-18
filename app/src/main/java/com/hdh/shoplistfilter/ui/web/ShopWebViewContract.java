@@ -12,5 +12,12 @@ public interface ShopWebViewContract {
         void getData(Intent intent);
         void clickDismiss();
         void clickJoiningHelper();
+
+        String enteredImvely();
+        String enteredLiphop();
+        String enteredNaning9();
+        String enteredMarishe();
+        String enteredDahong();
+        String enteredGosister();
     }
 }
