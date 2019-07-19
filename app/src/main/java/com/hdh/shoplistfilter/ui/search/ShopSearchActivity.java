@@ -1,7 +1,6 @@
 package com.hdh.shoplistfilter.ui.search;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;

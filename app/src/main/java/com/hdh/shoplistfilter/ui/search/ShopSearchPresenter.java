@@ -3,11 +3,8 @@ package com.hdh.shoplistfilter.ui.search;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.widget.ListView;
 
-import com.hdh.shoplistfilter.adapter.ShopListAdapter;
 import com.hdh.shoplistfilter.adapter.ShopSearchListAdapter;
 import com.hdh.shoplistfilter.data.model.Shop;
 import com.hdh.shoplistfilter.data.model.ShopList;
@@ -29,7 +26,7 @@ public class ShopSearchPresenter implements ShopSearchContract.Presenter {
 
     private ShopList mShopList , mShopSearchList;
 
-    public ShopSearchPresenter(ShopSearchContract.View mView, Context mContext, Activity mActivity) {
+    ShopSearchPresenter(ShopSearchContract.View mView, Context mContext, Activity mActivity) {
         this.mView = mView;
         this.mContext = mContext;
         this.mActivity = mActivity;
@@ -50,7 +47,6 @@ public class ShopSearchPresenter implements ShopSearchContract.Presenter {
             mShopList.setWeek(obj.getString("week"));
             JSONArray m_jArry = obj.getJSONArray("list");
 
-            Label:
             for (int i = 0; i < m_jArry.length(); i++) {
                 JSONObject jo_inside = m_jArry.getJSONObject(i);
 

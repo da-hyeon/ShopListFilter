@@ -1,6 +1,5 @@
 package com.hdh.shoplistfilter.ui.search;
 
-import android.text.TextWatcher;
 import android.widget.ListView;
 
 public interface ShopSearchContract {

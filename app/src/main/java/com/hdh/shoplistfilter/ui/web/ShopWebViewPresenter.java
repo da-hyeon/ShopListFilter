@@ -3,7 +3,6 @@ package com.hdh.shoplistfilter.ui.web;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import com.hdh.shoplistfilter.Constans;
 import com.hdh.shoplistfilter.MyApplication;
@@ -100,7 +99,7 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
             day = mUserInfo.getUserBirthdayDay();
         }
 
-        String script = "javascript:function afterLoad() {"
+        return "javascript:function afterLoad() {"
                 + "document.getElementById('hname').value = '" + mUserInfo.getUserName() + "';"
                 + "document.getElementById('id').value = '" + mUserInfo.getUserID() + "';"
                 + "document.getElementById('email').value = '" + mUserInfo.getUserFirstEmail() + "@" + mUserInfo.getUserLastEmail() +"';"
@@ -110,8 +109,6 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
                 + "document.getElementById('etcphone').value = '" + mUserInfo.getUserFirstPhoneNumber() + mUserInfo.getUserMidPhoneNumber() + mUserInfo.getUserLastPhoneNumber() + "';"
                 + "};"
                 + "afterLoad();";
-
-        return script;
     }
 
     /**
@@ -132,9 +129,7 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
             day = mUserInfo.getUserBirthdayDay();
         }
 
-        Log.d("birthMonth" ,month );
-        Log.d("birthDay" , day);
-        String script = "javascript:function afterLoad() {"
+        return "javascript:function afterLoad() {"
                 + "document.getElementById('name').value = '" + mUserInfo.getUserName() + "';"
                 + "document.getElementById('id').value = '" + mUserInfo.getUserID() + "';"
                 + "document.getElementById('zipcode').value = '" + mUserInfo.getUserAddressNumber() + "';"
@@ -149,8 +144,6 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
                 + "document.getElementById('cp3').value = '" + mUserInfo.getUserLastPhoneNumber() + "';"
                 + "};"
                 + "afterLoad();";
-
-        return script;
     }
 
     /**
@@ -171,7 +164,7 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
             day = mUserInfo.getUserBirthdayDay();
         }
 
-        String script = "javascript:function afterLoad() {"
+        return "javascript:function afterLoad() {"
                 + "document.getElementsByName('useremail')[0].value = '" + mUserInfo.getUserFirstEmail() + "@" + mUserInfo.getUserLastEmail() +"';"
                 + "document.getElementsByName('username')[0].value = '" + mUserInfo.getUserName() + "';"
                 + "document.getElementsByName('user_birth1')[0].value = '" + mUserInfo.getUserBirthdayYear() + "';"
@@ -180,8 +173,6 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
                 + "document.getElementsByName('user_tel')[0].value = '" + mUserInfo.getUserFirstPhoneNumber() + mUserInfo.getUserMidPhoneNumber() + mUserInfo.getUserLastPhoneNumber() + "';"
                 + "};"
                 + "afterLoad();";
-
-        return script;
     }
 
     /**
@@ -202,7 +193,7 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
             day = mUserInfo.getUserBirthdayDay();
         }
 
-        String script = "javascript:function afterLoad() {"
+        return "javascript:function afterLoad() {"
                 + "document.getElementById('member_name').value = '" + mUserInfo.getUserName() + "';"
                 + "document.getElementById('member_id').value = '" + mUserInfo.getUserID() + "';"
                 + "document.getElementById('birth_year').value = '" + mUserInfo.getUserBirthdayYear() + "';"
@@ -223,8 +214,6 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
 
                 + "};"
                 + "afterLoad();";
-
-        return script;
     }
 
     /**
@@ -233,7 +222,7 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
     @Override
     public String enteredGosister() {
 
-        String script = "javascript:function afterLoad() {"
+        return "javascript:function afterLoad() {"
                 + "document.getElementsByName('userid')[0].value = '" + mUserInfo.getUserID() + "';"
                 + "document.getElementsByName('name')[0].value = '" + mUserInfo.getUserName() + "';"
                 + "document.getElementsByName('HB_Y')[0].value = '" + mUserInfo.getUserBirthdayYear() + "';"
@@ -246,7 +235,5 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
 
                 + "};"
                 + "afterLoad();";
-
-        return script;
     }
 }
