@@ -58,22 +58,23 @@ public class JoiningHelperActivity extends BaseActivity implements JoiningHelper
                         mBinding.etEmailLast.getText().toString(),
                         mBinding.tvBirthday.getText().toString(),
                         mBinding.sArea.getSelectedItem().toString(),
-                        mBinding.sPasswordCheck.getSelectedItemPosition() + 1,
+                        mBinding.sPasswordCheck.getSelectedItemPosition(),
                         mBinding.etPasswordAnswer.getText().toString() ,
-                        mBinding.sAreaCode.getSelectedItemPosition() + 1,
-                        mBinding.sPhoneCode.getSelectedItemPosition() + 1,
-                        mBinding.sArea.getSelectedItemPosition() + 1
+                        mBinding.sAreaCode.getSelectedItemPosition(),
+                        mBinding.sPhoneCode.getSelectedItemPosition(),
+                        mBinding.sArea.getSelectedItemPosition()
                 )
         );
     }
 
     private void initData() {
         mPresenter = new JoiningHelperPresenter(this, this, this);
-        mPresenter.setFormInitial();
         mPresenter.setAreaCodeSpinner(mBinding.sAreaCode);
         mPresenter.setPhoneCodeSpinner(mBinding.sPhoneCode);
         mPresenter.setAreaSpinner(mBinding.sArea);
         mPresenter.setPasswordCheckSpinner(mBinding.sPasswordCheck);
+
+        mPresenter.setFormInitial();
     }
 
     /**

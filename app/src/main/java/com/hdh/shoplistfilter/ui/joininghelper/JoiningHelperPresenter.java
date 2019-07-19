@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hdh.shoplistfilter.Constans;
 import com.hdh.shoplistfilter.MyApplication;
 import com.hdh.shoplistfilter.R;
@@ -51,21 +53,29 @@ public class JoiningHelperPresenter implements JoiningHelperContract.Presenter {
 
             mView.changeAddressNumber(mUserInfo.getUserAddressNumber());
             mView.changeAddress(mUserInfo.getUserAddress());
+
+            mUserAddressNumber = mUserInfo.getUserAddressNumber();
+            mUserAddress = mUserInfo.getUserAddress();
         }
 
-        if (!mUserInfo.getUserBirthdayYear().equals("")){
+        //생년월이 설정이 되어있으면
+        if (!mUserInfo.getUserBirthdayYear().equals("0")){
             mView.showBirthDismiss();
-            mView.changeBirthday(mUserInfo.getUserBirthdayYear() + " 년" + mUserInfo.getUserBirthdayMonth() + "월 " + mUserInfo.getUserBirthdayDay() + "일");
+            mView.changeBirthday(mUserInfo.getUserBirthdayYear() + " 년 " + mUserInfo.getUserBirthdayMonth() + "월 " + mUserInfo.getUserBirthdayDay() + "일");
+
+            mYear = Integer.parseInt(mUserInfo.getUserBirthdayYear());
+            mMonth = Integer.parseInt(mUserInfo.getUserBirthdayMonth());
+            mDay = Integer.parseInt(mUserInfo.getUserBirthdayDay());
         }
 
         mView.setFormInitial(
                 mUserInfo.getUserID() ,
                 mUserInfo.getUserName(),
                 mUserInfo.getUserRestAddress() ,
-                mUserInfo.getUserFirstPhoneNumberPosition() ,
+                mUserInfo.getUserFirstHomePosition() ,
                 mUserInfo.getUserMidHomeNumber() ,
                 mUserInfo.getUserLastHomeNumber() ,
-                mUserInfo.getUserFirstHomePosition() ,
+                mUserInfo.getUserFirstPhoneNumberPosition() ,
                 mUserInfo.getUserMidPhoneNumber() ,
                 mUserInfo.getUserLastPhoneNumber() ,
                 mUserInfo.getUserFirstEmail() ,
@@ -167,9 +177,8 @@ public class JoiningHelperPresenter implements JoiningHelperContract.Presenter {
             int day = cal.get(Calendar.DAY_OF_MONTH);
             new DatePickerDialog(mContext, mDateSetListener, year, month, day).show();
         } else {
-            new DatePickerDialog(mContext, mDateSetListener, mYear, mMonth, mDay).show();
+            new DatePickerDialog(mContext, mDateSetListener, mYear, mMonth-1, mDay).show();
         }
-
     }
 
     /**
@@ -203,7 +212,7 @@ public class JoiningHelperPresenter implements JoiningHelperContract.Presenter {
         MyApplication.getUserInfoInstance().setUserInfo(
                 userID ,
                 userName ,
-                userRestAddress, mUserAddressNumber , mUserAddress ,
+                mUserAddressNumber , mUserAddress , userRestAddress,
                 userFirstHomeNumber , userMidHomeNumber , userLastHomeNumber ,
                 userFirstPhoneNumber , userMidPhoneNumber , userLastPhoneNumber ,
                 userFirstEmail , userLastEmail ,
@@ -250,11 +259,10 @@ public class JoiningHelperPresenter implements JoiningHelperContract.Presenter {
 
             (view, year, monthOfYear, dayOfMonth) -> {
                 mYear = year;
-                mMonth = monthOfYear;
+                mMonth = monthOfYear + 1;
                 mDay = dayOfMonth;
 
-                mView.changeBirthday(mYear + "년 " + (mMonth + 1) + "월 " + mDay + "일");
+                mView.changeBirthday(mYear + "년 " + mMonth + "월 " + mDay + "일");
                 mView.showBirthDismiss();
-                //텍스트뷰의 값을 업데이트함
             };
 }

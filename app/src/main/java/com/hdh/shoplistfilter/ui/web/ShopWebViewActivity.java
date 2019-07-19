@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -44,28 +45,40 @@ public class ShopWebViewActivity extends BaseActivity implements ShopWebViewCont
     private void initData() {
 
         mBinding.wvShop.setWebViewClient(new WebViewClient() {
-
+            /**
+             * 웹 페이지 리소스들을 로딩하면서 계속해서 호출됨.
+             */
             @Override
             public void onLoadResource(WebView view, String url) {
-                // 웹 페이지 리소스들을 로딩하면서 계속해서 호출된다.
                 super.onLoadResource(view, url);
+            }
 
+            /**
+             *
+             */
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
             }
 
 
+            /**
+             * 페이지 요청이 시작될 경우 호출된다.
+             */
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                // 페이지 요청이 시작될 경우 호출된다.
                 super.onPageStarted(view, url, favicon);
-                Log.d("enterence", "start");
+                mBinding.pbLoadingBar.setVisibility(View.VISIBLE);
             }
 
-            // 페이지 로딩이 종료시 호출된다.
+            /**
+             * 페이지 로딩이 종료시 호출된다.
+             */
             @Override
             public void onPageFinished(WebView view, String url) {
                 if (url.equals("https://m.imvely.com/member/join.html")) {
                     view.loadUrl(mPresenter.enteredImvely());
-                } else if (url.equals("https://www.liphop.co.kr/m/join_contract.html")) {
+                } else if (url.equals("https://www.liphop.co.kr/m/join_contract.html?type=new&mem_type=person&&yak=ok&first=&return_url=")) {
                     view.loadUrl(mPresenter.enteredLiphop());
                 } else if (url.equals("http://m.naning9.com/member/join.php")) {
                     view.loadUrl(mPresenter.enteredNaning9());
@@ -76,9 +89,16 @@ public class ShopWebViewActivity extends BaseActivity implements ShopWebViewCont
                 } else if (url.equals("https://m.gosister.co.kr/member/m_memberW2.asp")) {
                     view.loadUrl(mPresenter.enteredGosister());
                 }
+                mBinding.pbLoadingBar.setVisibility(View.GONE);
             }
         });
 
+        mBinding.wvShop.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                mBinding.pbLoadingBar.setProgress(newProgress);
+            }
+        });
         //웹뷰세팅
         WebSettings mWebSettings = mBinding.wvShop.getSettings(); //세부 세팅 등록
         mWebSettings.setJavaScriptEnabled(true); // 웹페이지 자바스크립트 허용 여부
@@ -94,8 +114,6 @@ public class ShopWebViewActivity extends BaseActivity implements ShopWebViewCont
 
         mPresenter = new ShopWebViewPresenter(this, this, this);
         mPresenter.getData(getIntent());
-
-
     }
 
     /**
@@ -108,8 +126,6 @@ public class ShopWebViewActivity extends BaseActivity implements ShopWebViewCont
 
     /**
      * 쇼핑몰 이름 변경하기
-     *
-     * @param shopName
      */
     @Override
     public void changeShopName(String shopName) {
@@ -128,5 +144,11 @@ public class ShopWebViewActivity extends BaseActivity implements ShopWebViewCont
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mBinding.wvShop.reload();
     }
 }

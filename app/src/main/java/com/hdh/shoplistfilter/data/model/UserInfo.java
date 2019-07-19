@@ -26,28 +26,32 @@ public class UserInfo {
     private int userAreaPosition;
 
     /**
-     * DB 에서 불러올 수 없으므로 초기 설정
+     * DB 에서 불러오지 않으므로 초기 설정
      * DB 연결 후 삭제요망
      */
     public UserInfo() {
-        userID = "황다현";
+        userID = "kjg123kg";
         userName = "황다현";
         userAddressNumber = "01799";
         userAddress = "서울 노원구 노원로58 (우방아파트)";
         userRestAddress = "404동 202호";
+        userFirstHomeNumber = "02";
+        userMidHomeNumber = "979";
+        userLastHomeNumber = "3339";
         userFirstPhoneNumber = "010";
         userMidPhoneNumber = "7600";
         userLastPhoneNumber = "1318";
         userFirstEmail = "kjg123kg";
         userLastEmail = "gmail.com";
         userBirthdayYear = "1994";
-        userBirthdayMonth = "06";
+        userBirthdayMonth = "6";
         userBirthdayDay = "18";
         userArea = "서울";
-        userAreaPosition = 1;
+        userAreaPosition = 2;
+        userFirstHomePosition = 1;
         userFirstPhoneNumberPosition = 1;
         userPasswordConfirmationQuestion = 3;
-        userPasswordConfirmationAnswer = "아무거나입력";
+        userPasswordConfirmationAnswer = "가족";
     }
 
     public void setUserInfo(String userID,
@@ -283,8 +287,11 @@ public class UserInfo {
                 ", userBirthdayMonth='" + userBirthdayMonth + '\'' +
                 ", userBirthdayDay='" + userBirthdayDay + '\'' +
                 ", userArea='" + userArea + '\'' +
-                ", userPasswordConfirmationQuestion='" + userPasswordConfirmationQuestion + '\'' +
+                ", userPasswordConfirmationQuestion=" + userPasswordConfirmationQuestion +
                 ", userPasswordConfirmationAnswer='" + userPasswordConfirmationAnswer + '\'' +
+                ", userFirstHomePosition=" + userFirstHomePosition +
+                ", userFirstPhoneNumberPosition=" + userFirstPhoneNumberPosition +
+                ", userAreaPosition=" + userAreaPosition +
                 '}';
     }
 }

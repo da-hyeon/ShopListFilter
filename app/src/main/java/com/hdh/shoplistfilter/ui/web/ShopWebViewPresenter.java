@@ -3,6 +3,7 @@ package com.hdh.shoplistfilter.ui.web;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.hdh.shoplistfilter.Constans;
 import com.hdh.shoplistfilter.MyApplication;
@@ -73,6 +74,7 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
                 + "document.getElementById('mobile3').value = '" + mUserInfo.getUserLastPhoneNumber() + "';"
                 + "document.getElementById('email1').value = '" + mUserInfo.getUserFirstEmail() + "';"
                 + "document.getElementById('email2').value = '" + mUserInfo.getUserLastEmail() + "';"
+                + "document.getElementById('email3').value = '" + mUserInfo.getUserLastEmail() + "';"
                 + "document.getElementById('birth_year').value = '" + mUserInfo.getUserBirthdayYear() + "';"
                 + "document.getElementById('birth_month').value = '" + mUserInfo.getUserBirthdayMonth() + "';"
                 + "document.getElementById('birth_day').value = '" + mUserInfo.getUserBirthdayDay() + "';"
@@ -104,9 +106,9 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
                 + "document.getElementById('hname').value = '" + mUserInfo.getUserName() + "';"
                 + "document.getElementById('id').value = '" + mUserInfo.getUserID() + "';"
                 + "document.getElementById('email').value = '" + mUserInfo.getUserFirstEmail() + "@" + mUserInfo.getUserLastEmail() +"';"
-                + "document.getElementById('birthyear').value = '" + mUserInfo.getUserBirthdayYear() + "';"
-                + "document.getElementById('birthmonth').value = '" + month + "';"
-                + "document.getElementById('birthdate').value = '" + day + "';"
+                + "document.getElementsByName('birthyear')[0].value = '" + mUserInfo.getUserBirthdayYear() + "';"
+                + "document.getElementsByName('birthmonth')[0].value = '" + month + "';"
+                + "document.getElementsByName('birthdate')[0].value = '" + day + "';"
                 + "document.getElementById('etcphone').value = '" + mUserInfo.getUserFirstPhoneNumber() + mUserInfo.getUserMidPhoneNumber() + mUserInfo.getUserLastPhoneNumber() + "';"
                 + "};"
                 + "afterLoad();";
@@ -132,6 +134,8 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
             day = mUserInfo.getUserBirthdayDay();
         }
 
+        Log.d("birthMonth" ,month );
+        Log.d("birthDay" , day);
         String script = "javascript:function afterLoad() {"
                 + "document.getElementById('name').value = '" + mUserInfo.getUserName() + "';"
                 + "document.getElementById('id').value = '" + mUserInfo.getUserID() + "';"
@@ -140,8 +144,8 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
                 + "document.getElementById('addr2').value = '" + mUserInfo.getUserRestAddress() + "';"
                 + "document.getElementById('email').value = '" + mUserInfo.getUserFirstEmail() + "@" + mUserInfo.getUserLastEmail() +"';"
                 + "document.getElementById('byear').value = '" + mUserInfo.getUserBirthdayYear() + "';"
-                + "document.getElementById('bmonth').value = '" + month + "';"
-                + "document.getElementById('bday').value = '" + day + "';"
+                + "document.getElementsByName('bmonth')[0].value = '" + month + "';"
+                + "document.getElementsByName('bday')[0].value = '" + day + "';"
                 + "document.getElementById('cp1').value = '" + mUserInfo.getUserFirstPhoneNumber() + "';"
                 + "document.getElementById('cp2').value = '" + mUserInfo.getUserMidPhoneNumber() + "';"
                 + "document.getElementById('cp3').value = '" + mUserInfo.getUserLastPhoneNumber() + "';"
@@ -170,11 +174,12 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
         }
 
         String script = "javascript:function afterLoad() {"
-                + "document.getElementById('useremail').value = '" + mUserInfo.getUserFirstEmail() + "@" + mUserInfo.getUserLastEmail() +"';"
-                + "document.getElementById('username').value = '" + mUserInfo.getUserName() + "';"
-                + "document.getElementById('user_birth1').value = '" + mUserInfo.getUserBirthdayYear() + "';"
-                + "document.getElementById('user_birth2').value = '" + month + "';"
-                + "document.getElementById('user_birth3').value = '" + day + "';"
+                + "document.getElementsByName('useremail')[0].value = '" + mUserInfo.getUserFirstEmail() + "@" + mUserInfo.getUserLastEmail() +"';"
+                + "document.getElementsByName('username')[0].value = '" + mUserInfo.getUserName() + "';"
+                + "document.getElementsByName('user_birth1')[0].value = '" + mUserInfo.getUserBirthdayYear() + "';"
+                + "document.getElementsByName('user_birth2')[0].value = '" + month + "';"
+                + "document.getElementsByName('user_birth3')[0].value = '" + day + "';"
+                + "document.getElementsByName('user_tel')[0].value = '" + mUserInfo.getUserFirstPhoneNumber() + mUserInfo.getUserMidPhoneNumber() + mUserInfo.getUserLastPhoneNumber() + "';"
                 + "};"
                 + "afterLoad();";
 
@@ -186,7 +191,42 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
      */
     @Override
     public String enteredDahong() {
-        return null;
+        String month , day;
+        if (Integer.parseInt(mUserInfo.getUserBirthdayMonth()) < 10){
+            month = "0"+mUserInfo.getUserBirthdayMonth();
+        } else {
+            month = mUserInfo.getUserBirthdayMonth();
+        }
+
+        if (Integer.parseInt(mUserInfo.getUserBirthdayDay()) < 10){
+            day = "0"+mUserInfo.getUserBirthdayDay();
+        } else {
+            day = mUserInfo.getUserBirthdayDay();
+        }
+
+        String script = "javascript:function afterLoad() {"
+                + "document.getElementById('member_name').value = '" + mUserInfo.getUserName() + "';"
+                + "document.getElementById('member_id').value = '" + mUserInfo.getUserID() + "';"
+                + "document.getElementById('birth_year').value = '" + mUserInfo.getUserBirthdayYear() + "';"
+                + "document.getElementById('birth_month').value = '" + month + "';"
+                + "document.getElementById('birth_day').value = '" + day + "';"
+                + "document.getElementById('member_zipcode').value = '" + mUserInfo.getUserAddressNumber() + "';"
+                + "document.getElementById('member_addr1').value = '" + mUserInfo.getUserAddress() + "';"
+                + "document.getElementById('member_addr2').value = '" + mUserInfo.getUserRestAddress() + "';"
+                + "document.getElementById('member_email1').value = '" + mUserInfo.getUserFirstEmail() + "';"
+                + "document.getElementById('member_email2').value = '" + mUserInfo.getUserLastEmail() + "';"
+                + "document.getElementById('member_email3').value = '" + mUserInfo.getUserLastEmail() + "';"
+                + "document.getElementById('home_ddd').value = '" + mUserInfo.getUserFirstHomeNumber() + "';"
+                + "document.getElementById('home_phone1').value = '" + mUserInfo.getUserMidHomeNumber() + "';"
+                + "document.getElementById('home_phone2').value = '" + mUserInfo.getUserLastHomeNumber() + "';"
+                + "document.getElementById('cp_phone1').value = '" + mUserInfo.getUserFirstPhoneNumber() + "';"
+                + "document.getElementById('cp_phone2').value = '" + mUserInfo.getUserMidPhoneNumber() + "';"
+                + "document.getElementById('cp_phone3').value = '" + mUserInfo.getUserLastPhoneNumber() + "';"
+
+                + "};"
+                + "afterLoad();";
+
+        return script;
     }
 
     /**
@@ -194,6 +234,21 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
      */
     @Override
     public String enteredGosister() {
-        return null;
+
+        String script = "javascript:function afterLoad() {"
+                + "document.getElementsByName('userid')[0].value = '" + mUserInfo.getUserID() + "';"
+                + "document.getElementsByName('name')[0].value = '" + mUserInfo.getUserName() + "';"
+                + "document.getElementsByName('HB_Y')[0].value = '" + mUserInfo.getUserBirthdayYear() + "';"
+                + "document.getElementsByName('HB_M')[0].value = '" + mUserInfo.getUserBirthdayMonth() + "';"
+                + "document.getElementsByName('HB_D')[0].value = '" + mUserInfo.getUserBirthdayDay() + "';"
+                + "document.getElementsByName('tel1_1')[0].value = '" + mUserInfo.getUserFirstPhoneNumber() + "';"
+                + "document.getElementsByName('tel1_2')[0].value = '" + mUserInfo.getUserMidPhoneNumber() + "';"
+                + "document.getElementsByName('tel1_3')[0].value = '" + mUserInfo.getUserLastPhoneNumber() + "';"
+                + "document.getElementsByName('email')[0].value = '" + mUserInfo.getUserFirstEmail() + "@" + mUserInfo.getUserLastEmail() +"';"
+
+                + "};"
+                + "afterLoad();";
+
+        return script;
     }
 }
