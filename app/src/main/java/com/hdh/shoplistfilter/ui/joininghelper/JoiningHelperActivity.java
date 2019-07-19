@@ -23,26 +23,32 @@ public class JoiningHelperActivity extends BaseActivity implements JoiningHelper
 
         initData();
 
+        //닫기 버튼 클릭
         mBinding.vDismiss.setOnClickListener(v ->
                 mPresenter.clickDismiss()
         );
 
+        //주소 버튼 클릭
         mBinding.btAddress.setOnClickListener(v ->
                 mPresenter.clickAddress()
         );
 
+        //주소삭제 버튼 클릭
         mBinding.ivDismiss.setOnClickListener(v ->
                 mPresenter.clickAddressSelectedDismiss()
         );
 
+        //생일입력 클릭
         mBinding.llBirthday.setOnClickListener(v ->
                 mPresenter.clickBirthday()
         );
 
+        //생일 삭제 클릭
         mBinding.ivBirthDismiss.setOnClickListener(v ->
                 mPresenter.clickBirthDismiss()
         );
 
+        //완료 버튼 클릭
         mBinding.btComplete.setOnClickListener(v ->
                 mPresenter.clickComplete(
                         mBinding.etID.getText().toString(),
@@ -67,6 +73,9 @@ public class JoiningHelperActivity extends BaseActivity implements JoiningHelper
         );
     }
 
+    /**
+     * 데이터 초기화 및 생성
+     */
     private void initData() {
         mPresenter = new JoiningHelperPresenter(this, this, this);
         mPresenter.setAreaCodeSpinner(mBinding.sAreaCode);
@@ -134,47 +143,74 @@ public class JoiningHelperActivity extends BaseActivity implements JoiningHelper
         mBinding.etPasswordAnswer.setText(userPasswordConfirmationAnswer);
     }
 
+    /**
+     * 주소찾기 레이아웃 보이기
+     */
     @Override
     public void showAddressFindLayout() {
         mBinding.llFindAddress.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * 선택된주소 레이아웃 보이기
+     */
     @Override
     public void showAddressSelectedLayout() {
         mBinding.llAddressSelected.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * 생일 레이아웃 보이기
+     */
     @Override
     public void showBirthDismiss() {
         mBinding.llBirthDismiss.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * 주소찾기 레이아웃 숨기기
+     */
     @Override
     public void hideAddressFindLayout() {
         mBinding.llFindAddress.setVisibility(View.GONE);
     }
 
+    /**
+     * 선택된주소 레이아웃 숨기기
+     */
     @Override
     public void hideAddressSelectedLayout() {
         mBinding.llAddressSelected.setVisibility(View.GONE);
     }
 
+    /**
+     * 생일 레이아웃 숨기기
+     */
     @Override
     public void hideBirthDismiss() {
         mBinding.llBirthDismiss.setVisibility(View.GONE);
     }
 
+    /**
+     * 우편번호 Text 변경하기
+     */
     @Override
     public void changeAddressNumber(String addressNumber) {
         mBinding.tvAddressNumber.setText(addressNumber);
     }
 
+    /**
+     * 메인주소 변경하기
+     */
     @Override
     public void changeAddress(String address) {
         mBinding.tvAddress.setText(address);
 
     }
 
+    /**
+     * 생일 Text 변경하기
+     */
     @Override
     public void changeBirthday(String birthday) {
         mBinding.tvBirthday.setText(birthday);

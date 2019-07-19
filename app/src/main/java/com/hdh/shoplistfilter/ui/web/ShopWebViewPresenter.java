@@ -55,14 +55,14 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
      */
     @Override
     public String enteredImvely() {
-        String hint = "";
+        String hint;
         if (mUserInfo.getUserPasswordConfirmationQuestion() < 10){
             hint = "hint_0" + mUserInfo.getUserPasswordConfirmationQuestion();
         } else {
             hint = "hint_" + mUserInfo.getUserPasswordConfirmationQuestion();
         }
 
-        String script = "javascript:function afterLoad() {"
+        return "javascript:function afterLoad() {"
                 + "document.getElementById('member_id').value = '" + mUserInfo.getUserID() + "';"
                 + "document.getElementById('hint').value = '" + hint + "';"
                 + "document.getElementById('hint_answer').value = '" + mUserInfo.getUserPasswordConfirmationAnswer() + "';"
@@ -80,8 +80,6 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
                 + "document.getElementById('birth_day').value = '" + mUserInfo.getUserBirthdayDay() + "';"
                 + "};"
                 + "afterLoad();";
-
-        return script;
     }
 
     /**

@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,13 +14,15 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.FullScreen.Transparent">
+        android:theme="@style/AppTheme.FullScreen.Transparent"
+        android:usesCleartextTraffic="true">
+
         <activity
             android:name=".ui.main.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTop"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="adjustResize"
             tools:replace="screenOrientation">
@@ -56,7 +57,8 @@
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen.Transparent"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".ui.joininghelper.daum.DaumWebViewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
@@ -65,6 +67,12 @@
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
+        <activity android:name=".ui.search.ShopSearchActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen.Transparent"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

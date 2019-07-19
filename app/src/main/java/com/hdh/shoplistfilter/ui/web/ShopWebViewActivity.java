@@ -1,13 +1,9 @@
 package com.hdh.shoplistfilter.ui.web;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -15,7 +11,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.hdh.shoplistfilter.MyApplication;
 import com.hdh.shoplistfilter.R;
 import com.hdh.shoplistfilter.databinding.ActivityShopWebViewBinding;
 import com.hdh.shoplistfilter.ui.base.BaseActivity;
@@ -32,10 +27,12 @@ public class ShopWebViewActivity extends BaseActivity implements ShopWebViewCont
         mBinding.setShopWebViewActivity(this);
         initData();
 
+        //닫기버튼(레이아웃) 클릭
         mBinding.vDismiss.setOnClickListener(v ->
                 mPresenter.clickDismiss()
         );
 
+        //회원가입 도우미 클릭
         mBinding.vJoiningHelper.setOnClickListener(v ->
                 mPresenter.clickJoiningHelper()
         );
@@ -76,18 +73,25 @@ public class ShopWebViewActivity extends BaseActivity implements ShopWebViewCont
              */
             @Override
             public void onPageFinished(WebView view, String url) {
-                if (url.equals("https://m.imvely.com/member/join.html")) {
-                    view.loadUrl(mPresenter.enteredImvely());
-                } else if (url.equals("https://www.liphop.co.kr/m/join_contract.html?type=new&mem_type=person&&yak=ok&first=&return_url=")) {
-                    view.loadUrl(mPresenter.enteredLiphop());
-                } else if (url.equals("http://m.naning9.com/member/join.php")) {
-                    view.loadUrl(mPresenter.enteredNaning9());
-                } else if (url.equals("http://m.marishe.com/join.mari")) {
-                    view.loadUrl(mPresenter.enteredMarishe());
-                } else if (url.equals("https://m.member.dscount.com/member/RegisterFormJob.asp")) {
-                    view.loadUrl(mPresenter.enteredDahong());
-                } else if (url.equals("https://m.gosister.co.kr/member/m_memberW2.asp")) {
-                    view.loadUrl(mPresenter.enteredGosister());
+                switch (url) {
+                    case "https://m.imvely.com/member/join.html":
+                        view.loadUrl(mPresenter.enteredImvely());
+                        break;
+                    case "https://www.liphop.co.kr/m/join_contract.html?type=new&mem_type=person&&yak=ok&first=&return_url=":
+                        view.loadUrl(mPresenter.enteredLiphop());
+                        break;
+                    case "http://m.naning9.com/member/join.php":
+                        view.loadUrl(mPresenter.enteredNaning9());
+                        break;
+                    case "http://m.marishe.com/join.mari":
+                        view.loadUrl(mPresenter.enteredMarishe());
+                        break;
+                    case "https://m.member.dscount.com/member/RegisterFormJob.asp":
+                        view.loadUrl(mPresenter.enteredDahong());
+                        break;
+                    case "https://m.gosister.co.kr/member/m_memberW2.asp":
+                        view.loadUrl(mPresenter.enteredGosister());
+                        break;
                 }
                 mBinding.pbLoadingBar.setVisibility(View.GONE);
             }
@@ -145,6 +149,7 @@ public class ShopWebViewActivity extends BaseActivity implements ShopWebViewCont
         }
         return super.onKeyDown(keyCode, event);
     }
+
 
     @Override
     protected void onResume() {

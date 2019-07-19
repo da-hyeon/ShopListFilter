@@ -6,5 +6,6 @@
 
     <color name="filter_ageButtonOriginal">#6fc8ce</color>
     <color name="filter_styleButtonOriginal">#E81E61</color>
+    <color name="filter_text">#a9aaaa</color>
 
 </resources>

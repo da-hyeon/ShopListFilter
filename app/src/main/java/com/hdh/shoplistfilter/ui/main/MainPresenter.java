@@ -1,5 +1,6 @@
 package com.hdh.shoplistfilter.ui.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,7 @@ import com.hdh.shoplistfilter.adapter.ShopListAdapter;
 import com.hdh.shoplistfilter.data.model.Shop;
 import com.hdh.shoplistfilter.data.model.ShopList;
 import com.hdh.shoplistfilter.ui.filter.FilterActivity;
+import com.hdh.shoplistfilter.ui.search.ShopSearchActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,11 +30,13 @@ import static android.content.Context.MODE_PRIVATE;
 public class MainPresenter implements MainContract.Presenter {
     private MainContract.View mView;
     private Context mContext;
+    private Activity mActivity;
     private ShopList mShopList;
 
     private String[] ageStatus;
     private String[] styleStatus;
 
+    private long mLastTime;
 
     MainPresenter(MainContract.View mView, Context mContext) {
         this.mView = mView;
@@ -59,6 +63,19 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     /**
+     * 뒤로가기 클릭 이벤트 처리
+     */
+    @Override
+    public void onBackPressed() {
+        if (mLastTime + 2000 < System.currentTimeMillis() || mLastTime == 0) {
+            mView.showToast("한 번 더 누르면 종료됩니다.");
+            mLastTime = System.currentTimeMillis();
+        } else {
+            mActivity.finish();
+        }
+    }
+
+    /**
      * Json 가져오기
      */
     @Override
@@ -69,7 +86,7 @@ public class MainPresenter implements MainContract.Presenter {
             JSONObject obj = new JSONObject(loadJSONFromAsset());
             mShopList.setWeek(obj.getString("week"));
             JSONArray m_jArry = obj.getJSONArray("list");
-
+            boolean filterSwitch = false;
             Label:
             for (int i = 0; i < m_jArry.length(); i++) {
                 JSONObject jo_inside = m_jArry.getJSONObject(i);
@@ -86,7 +103,17 @@ public class MainPresenter implements MainContract.Presenter {
                 if (ageStatus == null || styleStatus == null ||
                         (filterZeroCheck(ageStatus) && filterZeroCheck(styleStatus))) {
                     mShopList.getShopArrayList().add(new Shop(shopRank, shopName, shopAddress, shopStyle, shopAge, shopImageURL));
+                    if(!filterSwitch) {
+                        //필터 기본상태로 바꾸기
+                        mView.changeFilterButtonStatus(false);
+                        filterSwitch = true;
+                    }
                 } else {
+                    if(!filterSwitch) {
+                        //필터 선택상태로 바꾸기
+                        mView.changeFilterButtonStatus(true);
+                        filterSwitch = true;
+                    }
                     //연령대만 선택
                     if (!filterZeroCheck(ageStatus) && filterZeroCheck(styleStatus)) {
                         for (String ageSelected : ageStatus) {
@@ -182,9 +209,20 @@ public class MainPresenter implements MainContract.Presenter {
         listView.setAdapter(mShopListAdapter);
     }
 
+    /**
+     * 필터 클릭 이벤트 처리
+     */
     @Override
     public void clickFilter() {
         mView.moveActivity(new Intent(mContext, FilterActivity.class));
+    }
+
+    /**
+     * 검색 클릭 이벤트 처리
+     */
+    @Override
+    public void clickSearch() {
+        mView.moveActivity(new Intent(mContext, ShopSearchActivity.class));
     }
 
     /**

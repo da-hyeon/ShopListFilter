@@ -8,8 +8,6 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.hdh.shoplistfilter.Constans;
 import com.hdh.shoplistfilter.MyApplication;
 import com.hdh.shoplistfilter.R;
@@ -24,17 +22,19 @@ import static android.app.Activity.RESULT_OK;
 
 public class JoiningHelperPresenter implements JoiningHelperContract.Presenter {
 
+    //pareant
     private JoiningHelperContract.View mView;
     private Context mContext;
     private Activity mActivity;
 
+    //model
     private UserInfo mUserInfo;
 
+    //property
     private int mYear, mMonth, mDay;
-
     private String mUserAddressNumber , mUserAddress ;
 
-    public JoiningHelperPresenter(JoiningHelperContract.View mView, Context mContext, Activity mActivity) {
+    JoiningHelperPresenter(JoiningHelperContract.View mView, Context mContext, Activity mActivity) {
         this.mView = mView;
         this.mContext = mContext;
         this.mActivity = mActivity;

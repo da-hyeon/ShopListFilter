@@ -20,14 +20,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class ShopListAdapter extends BaseAdapter {
-
+public class ShopSearchListAdapter extends BaseAdapter {
 
     private Context mContext;
-
     private ArrayList<Shop> mShopArrayList;
 
-    public ShopListAdapter(Context mContext, ArrayList<Shop> mMyGroupArrayList) {
+    public ShopSearchListAdapter(Context mContext, ArrayList<Shop> mMyGroupArrayList) {
         this.mContext = mContext;
         this.mShopArrayList = mMyGroupArrayList;
     }
