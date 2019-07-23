@@ -22,7 +22,6 @@ import java.util.Arrays;
 
 public class ShopListAdapter extends BaseAdapter {
 
-
     private Context mContext;
 
     private ArrayList<Shop> mShopArrayList;
@@ -57,7 +56,6 @@ public class ShopListAdapter extends BaseAdapter {
         } else {
             mBinding = (ItemShopBinding) v.getTag();
         }
-
 
         mBinding.tvShopRankText.setText(String.valueOf(mShopArrayList.get(position).getShopRank()));
         String shopType = "";

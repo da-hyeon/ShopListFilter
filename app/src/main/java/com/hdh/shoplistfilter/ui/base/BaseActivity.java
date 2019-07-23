@@ -50,6 +50,14 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
                 .show();
     }
 
+    /**
+     * 액티비티 종료
+     */
+    @Override
+    public void removeActivity() {
+        finish();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();

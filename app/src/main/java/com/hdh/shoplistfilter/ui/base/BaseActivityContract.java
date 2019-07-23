@@ -4,7 +4,7 @@ public interface BaseActivityContract {
     interface View{
         void showWarningDialog(String title, String content);
         void showSuccessDialog(String title, String content);
-
+        void removeActivity();
     }
     interface Presenter{
     }

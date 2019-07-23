@@ -71,7 +71,7 @@ public class MainPresenter implements MainContract.Presenter {
             mView.showToast("한 번 더 누르면 종료됩니다.");
             mLastTime = System.currentTimeMillis();
         } else {
-            mActivity.finish();
+            mView.removeActivity();
         }
     }
 
