@@ -26,6 +26,7 @@ public class ShopSearchPresenter implements ShopSearchContract.Presenter {
     private Context mContext;
     private Activity mActivity;
 
+    private ShopListAdapter mShopListAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private ShopList mShopList, mShopSearchList;
 
@@ -77,11 +78,15 @@ public class ShopSearchPresenter implements ShopSearchContract.Presenter {
      */
     @Override
     public void setListView(RecyclerView recyclerView) {
-        recyclerView.setLayoutManager(mLinearLayoutManager);
-        recyclerView.setAdapter(new ShopListAdapter(mContext, mShopSearchList.getShopArrayList()));
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext() , mLinearLayoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
-
+        if (mShopListAdapter == null) {
+            mShopListAdapter = new ShopListAdapter(mContext, mShopSearchList.getShopArrayList());
+            recyclerView.setLayoutManager(mLinearLayoutManager);
+            recyclerView.setAdapter(mShopListAdapter);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext() , mLinearLayoutManager.getOrientation());
+            recyclerView.addItemDecoration(dividerItemDecoration);
+        } else {
+            mShopListAdapter.notifyDataSetChanged();
+        }
     }
 
     /**

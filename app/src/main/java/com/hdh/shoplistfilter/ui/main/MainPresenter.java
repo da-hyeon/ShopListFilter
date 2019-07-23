@@ -36,6 +36,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     private LinearLayoutManager mLinearLayoutManager;
 
+    private ShopListAdapter mShopListAdapter;
     private ShopList mShopList;
     private String[] ageStatus;
     private String[] styleStatus;
@@ -210,10 +211,15 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void setListView(RecyclerView recyclerView) {
-        recyclerView.setLayoutManager(mLinearLayoutManager);
-        recyclerView.setAdapter(new ShopListAdapter(mContext, mShopList.getShopArrayList()));
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext() , mLinearLayoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
+        if (mShopListAdapter == null) {
+            mShopListAdapter = new ShopListAdapter(mContext, mShopList.getShopArrayList());
+            recyclerView.setLayoutManager(mLinearLayoutManager);
+            recyclerView.setAdapter(mShopListAdapter);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext() , mLinearLayoutManager.getOrientation());
+            recyclerView.addItemDecoration(dividerItemDecoration);
+        } else {
+            mShopListAdapter.notifyDataSetChanged();
+        }
     }
 
     /**

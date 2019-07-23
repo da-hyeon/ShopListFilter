@@ -13,6 +13,7 @@ public interface ShopSearchContract {
         void getJson();
 
         void setListView(RecyclerView recyclerView);
+
         void onTextChanged(String s);
 
         void clickDismiss();
