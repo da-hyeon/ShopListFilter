@@ -2,8 +2,10 @@ package com.hdh.shoplistfilter.ui.web;
 
 import android.content.Intent;
 
+import com.hdh.shoplistfilter.ui.main.MainContract;
+
 public interface ShopWebViewContract {
-    interface View{
+    interface View extends MainContract.View {
         void showWebView(String url);
 
         void changeShopName(String shopName);

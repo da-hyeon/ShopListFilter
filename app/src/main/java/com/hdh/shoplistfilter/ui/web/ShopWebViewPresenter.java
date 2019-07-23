@@ -38,7 +38,7 @@ public class ShopWebViewPresenter implements ShopWebViewContract.Presenter {
      */
     @Override
     public void clickDismiss() {
-        mActivity.finish();
+        mView.removeActivity();
     }
 
     /**

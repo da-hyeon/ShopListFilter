@@ -103,7 +103,7 @@ public class FilterPresenter implements FilterContract.Presenter {
         Log.d("Arrays", Arrays.toString(styleStatus));
         editor.apply();
 
-        mActivity.finish();
+        mView.removeActivity();
     }
 
     /**

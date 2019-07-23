@@ -172,6 +172,6 @@ public class ShopSearchPresenter implements ShopSearchContract.Presenter {
      */
     @Override
     public void clickDismiss() {
-        mActivity.finish();
+        mView.removeActivity();
     }
 }
