@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.widget.ListView;
 
-import com.hdh.shoplistfilter.adapter.ShopSearchListAdapter;
+import com.hdh.shoplistfilter.adapter.ShopListAdapter;
 import com.hdh.shoplistfilter.data.model.Shop;
 import com.hdh.shoplistfilter.data.model.ShopList;
 
@@ -24,7 +24,7 @@ public class ShopSearchPresenter implements ShopSearchContract.Presenter {
     private Context mContext;
     private Activity mActivity;
 
-    private ShopList mShopList , mShopSearchList;
+    private ShopList mShopList, mShopSearchList;
 
     ShopSearchPresenter(ShopSearchContract.View mView, Context mContext, Activity mActivity) {
         this.mView = mView;
@@ -32,7 +32,7 @@ public class ShopSearchPresenter implements ShopSearchContract.Presenter {
         this.mActivity = mActivity;
         mShopList = new ShopList();
         mShopSearchList = new ShopList();
-}
+    }
 
 
     /**
@@ -73,8 +73,8 @@ public class ShopSearchPresenter implements ShopSearchContract.Presenter {
      */
     @Override
     public void setListView(ListView listView) {
-        ShopSearchListAdapter mShopSearchListAdapter = new ShopSearchListAdapter(mContext, mShopSearchList.getShopArrayList());
-        listView.setAdapter(mShopSearchListAdapter);
+        ShopListAdapter mShopListAdapter = new ShopListAdapter(mContext, mShopSearchList.getShopArrayList());
+        listView.setAdapter(mShopListAdapter);
     }
 
     /**
@@ -90,7 +90,7 @@ public class ShopSearchPresenter implements ShopSearchContract.Presenter {
                 }
             }
         }
-        if (mShopSearchList.getShopArrayList().size() == 0){
+        if (mShopSearchList.getShopArrayList().size() == 0) {
             mView.changeLayout(false);
         } else {
             mView.changeLayout(true);

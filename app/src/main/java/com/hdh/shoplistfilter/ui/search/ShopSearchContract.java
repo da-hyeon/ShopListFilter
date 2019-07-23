@@ -2,10 +2,10 @@ package com.hdh.shoplistfilter.ui.search;
 
 import android.widget.ListView;
 
-import com.hdh.shoplistfilter.ui.main.MainContract;
+import com.hdh.shoplistfilter.ui.base.BaseActivityContract;
 
 public interface ShopSearchContract {
-    interface View extends MainContract.View {
+    interface View extends BaseActivityContract.View {
         void changeLayout(boolean status);
     }
     interface Presenter{
