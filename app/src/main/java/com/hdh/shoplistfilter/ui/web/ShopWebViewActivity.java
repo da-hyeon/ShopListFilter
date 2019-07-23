@@ -3,7 +3,9 @@ package com.hdh.shoplistfilter.ui.web;
 import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -73,26 +75,21 @@ public class ShopWebViewActivity extends BaseActivity implements ShopWebViewCont
              */
             @Override
             public void onPageFinished(WebView view, String url) {
-                switch (url) {
-                    case "https://m.imvely.com/member/join.html":
-                        view.loadUrl(mPresenter.enteredImvely());
-                        break;
-                    case "https://www.liphop.co.kr/m/join_contract.html?type=new&mem_type=person&&yak=ok&first=&return_url=":
-                        view.loadUrl(mPresenter.enteredLiphop());
-                        break;
-                    case "http://m.naning9.com/member/join.php":
-                        view.loadUrl(mPresenter.enteredNaning9());
-                        break;
-                    case "http://m.marishe.com/join.mari":
-                        view.loadUrl(mPresenter.enteredMarishe());
-                        break;
-                    case "https://m.member.dscount.com/member/RegisterFormJob.asp":
-                        view.loadUrl(mPresenter.enteredDahong());
-                        break;
-                    case "https://m.gosister.co.kr/member/m_memberW2.asp":
-                        view.loadUrl(mPresenter.enteredGosister());
-                        break;
+                Log.d("shopURL" , url+"");
+                if (url.contains("m.imvely.com/member/join.html")){
+                    view.loadUrl(mPresenter.enteredImvely());
+                } else if (url.contains("www.liphop.co.kr/m/join_contract.html?type=new&mem_type=person&&yak=ok&first=&return_url=")) {
+                    view.loadUrl(mPresenter.enteredLiphop());
+                } else if (url.contains("m.naning9.com/member/join.php")) {
+                    view.loadUrl(mPresenter.enteredNaning9());
+                } else if (url.contains("m.marishe.com/join.mari")) {
+                    view.loadUrl(mPresenter.enteredMarishe());
+                } else if (url.contains("m.member.dscount.com/member/RegisterFormJob.asp")) {
+                    view.loadUrl(mPresenter.enteredDahong());
+                } else if (url.contains("m.gosister.co.kr/member/m_memberW2.asp")) {
+                    view.loadUrl(mPresenter.enteredGosister());
                 }
+
                 mBinding.pbLoadingBar.setVisibility(View.GONE);
             }
         });
@@ -113,8 +110,16 @@ public class ShopWebViewActivity extends BaseActivity implements ShopWebViewCont
         mWebSettings.setSupportZoom(false); // 화면 줌 허용 여부
         mWebSettings.setBuiltInZoomControls(true); // 화면 확대 축소 허용 여부
         mWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); // 컨텐츠 사이즈 맞추기
-        mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
+        mWebSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); // 브라우저 캐시 허용 여부
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            mBinding.wvShop.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        } else {
+            mBinding.wvShop.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+        mBinding.wvShop.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        mBinding.wvShop.setScrollbarFadingEnabled(true);
 
         mPresenter = new ShopWebViewPresenter(this, this, this);
         mPresenter.getData(getIntent());
