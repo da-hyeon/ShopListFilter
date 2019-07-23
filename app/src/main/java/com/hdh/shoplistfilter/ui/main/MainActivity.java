@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity implements MainContract.View{
         super.onResume();
         mPresenter.loadFilterData();
         mPresenter.getJson();
-        mPresenter.setListView(mBinding.lvShop);
+        mPresenter.setListView(mBinding.rvShop);
     }
 
     /**

@@ -36,7 +36,7 @@ public class ShopSearchActivity extends BaseActivity implements ShopSearchContra
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mPresenter.onTextChanged(s.toString());
-                mPresenter.setListView(mBinding.lvShop);
+                mPresenter.setListView(mBinding.rvShop);
             }
 
             @Override
@@ -61,10 +61,10 @@ public class ShopSearchActivity extends BaseActivity implements ShopSearchContra
     public void changeLayout(boolean status) {
         if (status) {
             mBinding.llNotFoundShop.setVisibility(View.GONE);
-            mBinding.lvShop.setVisibility(View.VISIBLE);
+            mBinding.rvShop.setVisibility(View.VISIBLE);
         } else {
             mBinding.llNotFoundShop.setVisibility(View.VISIBLE);
-            mBinding.lvShop.setVisibility(View.GONE);
+            mBinding.rvShop.setVisibility(View.GONE);
         }
     }
 }

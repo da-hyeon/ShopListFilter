@@ -1,6 +1,7 @@
 package com.hdh.shoplistfilter.ui.main;
 
 import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 
 import com.hdh.shoplistfilter.ui.base.BaseActivityContract;
@@ -21,7 +22,7 @@ public interface MainContract {
 
         void getJson();
 
-        void setListView(ListView listView);
+        void setListView(RecyclerView recyclerView);
 
         void clickFilter();
         void clickSearch();

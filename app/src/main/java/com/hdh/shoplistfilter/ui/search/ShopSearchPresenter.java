@@ -3,7 +3,9 @@ package com.hdh.shoplistfilter.ui.search;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
-import android.widget.ListView;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.hdh.shoplistfilter.adapter.ShopListAdapter;
 import com.hdh.shoplistfilter.data.model.Shop;
@@ -24,6 +26,7 @@ public class ShopSearchPresenter implements ShopSearchContract.Presenter {
     private Context mContext;
     private Activity mActivity;
 
+    private LinearLayoutManager mLinearLayoutManager;
     private ShopList mShopList, mShopSearchList;
 
     ShopSearchPresenter(ShopSearchContract.View mView, Context mContext, Activity mActivity) {
@@ -32,6 +35,7 @@ public class ShopSearchPresenter implements ShopSearchContract.Presenter {
         this.mActivity = mActivity;
         mShopList = new ShopList();
         mShopSearchList = new ShopList();
+        mLinearLayoutManager = new LinearLayoutManager(mContext);
     }
 
 
@@ -72,9 +76,12 @@ public class ShopSearchPresenter implements ShopSearchContract.Presenter {
      * ListView Adapter 설정
      */
     @Override
-    public void setListView(ListView listView) {
-        ShopListAdapter mShopListAdapter = new ShopListAdapter(mContext, mShopSearchList.getShopArrayList());
-        listView.setAdapter(mShopListAdapter);
+    public void setListView(RecyclerView recyclerView) {
+        recyclerView.setLayoutManager(mLinearLayoutManager);
+        recyclerView.setAdapter(new ShopListAdapter(mContext, mShopSearchList.getShopArrayList()));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext() , mLinearLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
     }
 
     /**

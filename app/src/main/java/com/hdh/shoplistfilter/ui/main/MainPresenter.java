@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.widget.ListView;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.hdh.shoplistfilter.Constans;
 import com.hdh.shoplistfilter.MyApplication;
@@ -31,8 +33,10 @@ public class MainPresenter implements MainContract.Presenter {
     private MainContract.View mView;
     private Context mContext;
     private Activity mActivity;
-    private ShopList mShopList;
 
+    private LinearLayoutManager mLinearLayoutManager;
+
+    private ShopList mShopList;
     private String[] ageStatus;
     private String[] styleStatus;
 
@@ -42,6 +46,7 @@ public class MainPresenter implements MainContract.Presenter {
         this.mView = mView;
         this.mContext = mContext;
         mShopList = MyApplication.getShopListInstance();
+        mLinearLayoutManager = new LinearLayoutManager(mContext);
     }
 
     /**
@@ -204,9 +209,11 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void setListView(ListView listView) {
-        ShopListAdapter mShopListAdapter = new ShopListAdapter(mContext, mShopList.getShopArrayList());
-        listView.setAdapter(mShopListAdapter);
+    public void setListView(RecyclerView recyclerView) {
+        recyclerView.setLayoutManager(mLinearLayoutManager);
+        recyclerView.setAdapter(new ShopListAdapter(mContext, mShopList.getShopArrayList()));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext() , mLinearLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
     /**
